@@ -4,7 +4,7 @@ python:
   - "2.6"
   - "2.7"
 env:
-  -
+  - DEBUGPY=-dbg
   - GEVENTSETUP_EV_VERIFY=3
   - GEVENT_FILE=thread
   - GEVENT_BACKEND=select GEVENTSETUP_EV_VERIFY=3
@@ -17,16 +17,18 @@ matrix:
   - env: GEVENT_BACKEND=signalfd
 install:
  - deactivate
- - export VER=$TRAVIS_PYTHON_VERSION
+ - export VER=$TRAVIS_PYTHON_VERSION$DEBUGPY
+ - sudo apt-get update -qq
+ - sudo apt-get install -q python$VER
  - export PYTHON=/usr/bin/python$VER
  - echo $PYTHON && $PYTHON --version
 #broken - if [[ $VER == '2.5' ]]; then sudo apt-get install libssl-dev libkrb5-dev libbluetooth-dev; pip install --use-mirrors sslfix; fi
- - curl -sSLO --retry 5 --fail https://github.com/downloads/SiteSupport/gevent/python2.7-cython_0.17_i386.deb
- - curl -sSLO --retry 5 --fail https://github.com/downloads/SiteSupport/gevent/python$VER-greenlet_0.4.0_i386.deb
- - curl -sSLO --retry 5 --fail https://github.com/downloads/SiteSupport/gevent/python$VER-psycopg2_2.4.5_i386.deb
- - curl -sSLO --retry 5 --fail https://github.com/downloads/SiteSupport/gevent/python$VER-pysendfile_2.0.0_i386.deb
+ - curl -sSLO --retry 5 --fail https://github.com/downloads/denik/packages/python2.7-cython_0.17.1_i386.deb
+ - curl -sSLO --retry 5 --fail https://github.com/downloads/denik/packages/python$VER-greenlet_0.4.0_i386.deb
+ - curl -sSLO --retry 5 --fail https://github.com/downloads/denik/packages/python$VER-psycopg2_2.4.5_i386.deb
+ - curl -sSLO --retry 5 --fail https://github.com/downloads/denik/packages/python$VER-pysendfile_2.0.0_i386.deb
  - curl -sSLO --retry 5 --fail http://pypi.python.org/packages/source/w/web.py/web.py-0.37.tar.gz #md5=93375e3f03e74d6bf5c5096a4962a8db
- - sudo dpkg -i python2.7-cython_0.17_i386.deb
+ - sudo dpkg -i python2.7-cython_0.17.1_i386.deb
  - sudo dpkg -i python$VER-greenlet_0.4.0_i386.deb
  - sudo dpkg -i python$VER-psycopg2_2.4.5_i386.deb
  - sudo dpkg -i python$VER-pysendfile_2.0.0_i386.deb
@@ -46,4 +48,3 @@ notifications:
       - denis.bilenko@gmail.com
     on_success: change
     on_failure: change
-
