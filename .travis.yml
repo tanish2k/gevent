@@ -29,7 +29,7 @@ install:
  - curl -sSLO --retry 5 --fail https://github.com/downloads/denik/packages/python$VER-psycopg2_2.4.5_i386.deb
  - curl -sSLO --retry 5 --fail https://github.com/downloads/denik/packages/python$VER-pysendfile_2.0.0_i386.deb
  - curl -sSLO --retry 5 --fail http://pypi.python.org/packages/source/w/web.py/web.py-0.37.tar.gz #md5=93375e3f03e74d6bf5c5096a4962a8db
- - sudo dpkg -i python2.7-cython_0.17_i386.deb
+ - sudo dpkg -i python2.7-cython_0.17.1_i386.deb
  - sudo dpkg -i python$VER-greenlet_0.4.0_i386.deb
  - sudo dpkg -i python$VER-psycopg2_2.4.5_i386.deb
  - sudo dpkg -i python$VER-pysendfile_2.0.0_i386.deb
