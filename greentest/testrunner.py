@@ -156,11 +156,14 @@ def full(args=None):
             options['setenv'] = my_setenv
             tests.append((name, cmd, options))
 
-    if sys.version_info[:2] == (2, 7) and not hasattr(sys, 'gettotalrefcount'):
-        # only run pep8 on one version of python - non-debug 2.7
+    if is_primary_target() and os.environ.get('CHECK_PEP8'):
         tests.append(('xtest_pep8.py', [sys.executable, '-u', 'xtest_pep8.py'], None))
 
     return tests
+
+
+def is_primary_target():
+    return sys.version_info[:2] == (2, 7) and not hasattr(sys, 'gettotalrefcount')
 
 
 def main():
