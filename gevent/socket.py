@@ -448,9 +448,10 @@ class socket(object):
         sock = self._sock
         if timeout is timeout_default:
             timeout = self.timeout
+	import socket as proxySocket
         try:
             return sock.send(data, flags)
-        except error:
+        except proxySocket.error, ex:
             ex = sys.exc_info()[1]
             if ex.args[0] != EWOULDBLOCK or timeout == 0.0:
                 raise
